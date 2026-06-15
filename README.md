@@ -9,12 +9,12 @@
 </p>
 
 <p align="center">
-  <a href="https://colab.research.google.com/github/yourusername/circuit-discovery-toy-task/blob/main/notebooks/colab_demo.ipynb">
-    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
-  </a>
-  <a href="https://github.com/yourusername/circuit-discovery-toy-task/actions">
-    <img src="https://github.com/yourusername/circuit-discovery-toy-task/actions/workflows/ci.yml/badge.svg" alt="CI">
-  </a>
+  <a href="https://colab.research.google.com/github/MosadCreates/circuit-discovery-toy-task/blob/main/notebooks/colab_demo.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
+</a>
+<a href="https://github.com/MosadCreates/circuit-discovery-toy-task/actions">
+  <img src="https://github.com/MosadCreates/circuit-discovery-toy-task/actions/workflows/ci.yml/badge.svg" alt="CI">
+</a>
   <a href="LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
   </a>
