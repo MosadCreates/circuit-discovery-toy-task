@@ -1,8 +1,8 @@
 site_name: Circuit Discovery on a Toy Task
 site_description: "Reverse-engineering a grokked transformer on modular addition: Fourier mechanisms, activation patching, and minimal circuit identification"
 site_author: Mechanistic Interpretability Research
-site_url: https://yourusername.github.io/circuit-discovery-toy-task
-repo_url: https://github.com/yourusername/circuit-discovery-toy-task
+site_url: https://mosadcreates.github.io/circuit-discovery-toy-task
+repo_url: https://github.com/mosadcreates/circuit-discovery-toy-task
 repo_name: circuit-discovery-toy-task
 edit_uri: ""
 
@@ -40,7 +40,7 @@ theme:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/yourusername/circuit-discovery-toy-task
+      link: https://github.com/mosadcreates/circuit-discovery-toy-task
   generator: false
 
 markdown_extensions:

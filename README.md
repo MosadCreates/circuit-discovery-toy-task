@@ -21,7 +21,7 @@
 </p>
 
 <p align="center">
-  <strong><a href="https://yourusername.github.io/circuit-discovery-toy-task/">View the Live Writeup</a></strong>
+  <strong><a href="https://mosadcreates.github.io/circuit-discovery-toy-task/">View the Live Writeup</a></strong>
 </p>
 
 ---
@@ -70,7 +70,7 @@ A **minimal circuit of 2 attention heads and 15 MLP neurons** (fewer than 5% of 
 
 ```bash
 # Clone
-git clone https://github.com/yourusername/circuit-discovery-toy-task
+git clone https://github.com/mosadcreates/circuit-discovery-toy-task
 cd circuit-discovery-toy-task
 
 # Setup (choose one)
@@ -162,9 +162,9 @@ Full pinned versions in [`requirements.txt`](requirements.txt) (CUDA) and [`requ
 @misc{circuit-discovery-toy-task,
     title={Circuit Discovery on a Toy Task:
            Reverse-Engineering a Grokked Transformer on Modular Addition},
-    author={Your Name},
+    author={Mosad Creates},
     year={2026},
-    howpublished={\url{https://github.com/yourusername/circuit-discovery-toy-task}}
+    howpublished={\url{https://github.com/mosadcreates/circuit-discovery-toy-task}}
 }
 ```
 
