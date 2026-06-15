@@ -1,0 +1,1447 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Reverse-engineering a grokked transformer on modular addition: Fourier mechanisms, activation patching, and minimal circuit identification">
+      
+      
+        <meta name="author" content="Mechanistic Interpretability Research">
+      
+      
+        <link rel="canonical" href="https://mosadcreates.github.io/circuit-discovery-toy-task/background/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../methods/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Background - Circuit Discovery on a Toy Task</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#background" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Circuit Discovery on a Toy Task" class="md-header__button md-logo" aria-label="Circuit Discovery on a Toy Task" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.33 12.91c.09 1.55-.62 3.04-1.89 3.95l.77 1.49c.23.45.26.98.06 1.45-.19.47-.58.84-1.06 1l-.79.25a1.687 1.687 0 0 1-1.86-.55L14.44 18c-.89-.15-1.73-.53-2.44-1.1-.5.15-1 .23-1.5.23-.88 0-1.76-.27-2.5-.79-.53.16-1.07.23-1.62.22-.79.01-1.57-.15-2.3-.45a4.1 4.1 0 0 1-2.43-3.61c-.08-.72.04-1.45.35-2.11-.29-.75-.32-1.57-.07-2.33C2.3 7.11 3 6.32 3.87 5.82c.58-1.69 2.21-2.82 4-2.7 1.6-1.5 4.05-1.66 5.83-.37.42-.11.86-.17 1.3-.17 1.36-.03 2.65.57 3.5 1.64 2.04.53 3.5 2.35 3.58 4.47.05 1.11-.25 2.2-.86 3.13.07.36.11.72.11 1.09m-5-1.41c.57.07 1.02.5 1.02 1.07a1 1 0 0 1-1 1h-.63c-.32.9-.88 1.69-1.62 2.29.25.09.51.14.77.21 5.13-.07 4.53-3.2 4.53-3.25a2.59 2.59 0 0 0-2.69-2.49 1 1 0 0 1-1-1 1 1 0 0 1 1-1c1.23.03 2.41.49 3.33 1.3.05-.29.08-.59.08-.89-.06-1.24-.62-2.32-2.87-2.53-1.25-2.96-4.4-1.32-4.4-.4-.03.23.21.72.25.75a1 1 0 0 1 1 1c0 .55-.45 1-1 1-.53-.02-1.03-.22-1.43-.56-.48.31-1.03.5-1.6.56-.57.05-1.04-.35-1.07-.9a.97.97 0 0 1 .88-1.1c.16-.02.94-.14.94-.77 0-.66.25-1.29.68-1.79-.92-.25-1.91.08-2.91 1.29C6.75 5 6 5.25 5.45 7.2 4.5 7.67 4 8 3.78 9c1.08-.22 2.19-.13 3.22.25.5.19.78.75.59 1.29-.19.52-.77.78-1.29.59-.73-.32-1.55-.34-2.3-.06-.32.27-.32.83-.32 1.27 0 .74.37 1.43 1 1.83.53.27 1.12.41 1.71.4q-.225-.39-.39-.81a1.038 1.038 0 0 1 1.96-.68c.4 1.14 1.42 1.92 2.62 2.05 1.37-.07 2.59-.88 3.19-2.13.23-1.38 1.34-1.5 2.56-1.5m2 7.47-.62-1.3-.71.16 1 1.25zm-4.65-8.61a1 1 0 0 0-.91-1.03c-.71-.04-1.4.2-1.93.67-.57.58-.87 1.38-.84 2.19a1 1 0 0 0 1 1c.57 0 1-.45 1-1 0-.27.07-.54.23-.76.12-.1.27-.15.43-.15.55.03 1.02-.38 1.02-.92"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Circuit Discovery on a Toy Task
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Background
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mosadcreates/circuit-discovery-toy-task" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    circuit-discovery-toy-task
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Circuit Discovery on a Toy Task" class="md-nav__button md-logo" aria-label="Circuit Discovery on a Toy Task" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.33 12.91c.09 1.55-.62 3.04-1.89 3.95l.77 1.49c.23.45.26.98.06 1.45-.19.47-.58.84-1.06 1l-.79.25a1.687 1.687 0 0 1-1.86-.55L14.44 18c-.89-.15-1.73-.53-2.44-1.1-.5.15-1 .23-1.5.23-.88 0-1.76-.27-2.5-.79-.53.16-1.07.23-1.62.22-.79.01-1.57-.15-2.3-.45a4.1 4.1 0 0 1-2.43-3.61c-.08-.72.04-1.45.35-2.11-.29-.75-.32-1.57-.07-2.33C2.3 7.11 3 6.32 3.87 5.82c.58-1.69 2.21-2.82 4-2.7 1.6-1.5 4.05-1.66 5.83-.37.42-.11.86-.17 1.3-.17 1.36-.03 2.65.57 3.5 1.64 2.04.53 3.5 2.35 3.58 4.47.05 1.11-.25 2.2-.86 3.13.07.36.11.72.11 1.09m-5-1.41c.57.07 1.02.5 1.02 1.07a1 1 0 0 1-1 1h-.63c-.32.9-.88 1.69-1.62 2.29.25.09.51.14.77.21 5.13-.07 4.53-3.2 4.53-3.25a2.59 2.59 0 0 0-2.69-2.49 1 1 0 0 1-1-1 1 1 0 0 1 1-1c1.23.03 2.41.49 3.33 1.3.05-.29.08-.59.08-.89-.06-1.24-.62-2.32-2.87-2.53-1.25-2.96-4.4-1.32-4.4-.4-.03.23.21.72.25.75a1 1 0 0 1 1 1c0 .55-.45 1-1 1-.53-.02-1.03-.22-1.43-.56-.48.31-1.03.5-1.6.56-.57.05-1.04-.35-1.07-.9a.97.97 0 0 1 .88-1.1c.16-.02.94-.14.94-.77 0-.66.25-1.29.68-1.79-.92-.25-1.91.08-2.91 1.29C6.75 5 6 5.25 5.45 7.2 4.5 7.67 4 8 3.78 9c1.08-.22 2.19-.13 3.22.25.5.19.78.75.59 1.29-.19.52-.77.78-1.29.59-.73-.32-1.55-.34-2.3-.06-.32.27-.32.83-.32 1.27 0 .74.37 1.43 1 1.83.53.27 1.12.41 1.71.4q-.225-.39-.39-.81a1.038 1.038 0 0 1 1.96-.68c.4 1.14 1.42 1.92 2.62 2.05 1.37-.07 2.59-.88 3.19-2.13.23-1.38 1.34-1.5 2.56-1.5m2 7.47-.62-1.3-.71.16 1 1.25zm-4.65-8.61a1 1 0 0 0-.91-1.03c-.71-.04-1.4.2-1.93.67-.57.58-.87 1.38-.84 2.19a1 1 0 0 0 1 1c.57 0 1-.45 1-1 0-.27.07-.54.23-.76.12-.1.27-.15.43-.15.55.03 1.02-.38 1.02-.92"/></svg>
+
+    </a>
+    Circuit Discovery on a Toy Task
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mosadcreates/circuit-discovery-toy-task" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    circuit-discovery-toy-task
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-the-modular-addition-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The Modular Addition Task
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. The Modular Addition Task">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Task
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-a-prime-modulus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why a Prime Modulus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-it-is-a-good-circuit-discovery-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why It Is a Good Circuit Discovery Target
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-grokking-phenomenon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The Grokking Phenomenon
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. The Grokking Phenomenon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-grokking-happens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Grokking Happens
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#foundational-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Foundational References
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-this-project-adds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Project Adds
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-what-circuit-discovery-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. What Circuit Discovery Means
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. What Circuit Discovery Means">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#circuits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Circuits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-residual-stream-as-a-communication-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Residual Stream as a Communication Channel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-three-analysis-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Three Analysis Tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Three Analysis Tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-attention-pattern-visualisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Attention Pattern Visualisation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-activation-patching-causal-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Activation Patching (Causal Tracing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-logit-lens-and-direct-logit-attribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Logit Lens and Direct Logit Attribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-specific-claims-hypotheses-to-verify" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Specific Claims (Hypotheses to Verify)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Specific Claims (Hypotheses to Verify)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#h1-the-model-uses-fourier-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        H1: The model uses Fourier features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#h2-specific-attention-heads-implement-the-key-computation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        H2: Specific attention heads implement the key computation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#h3-the-mlp-implements-a-frequency-selective-nonlinearity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        H3: The MLP implements a frequency-selective nonlinearity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#h4-the-circuit-can-be-reduced-to-a-small-set-of-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        H4: The circuit can be reduced to a small set of components
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../methods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Methods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fourier_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fourier Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../circuit_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Circuit Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../minimal_circuit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Minimal Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../discussion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Discussion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../writeup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full Writeup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reproduce/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reproduce
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-the-modular-addition-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The Modular Addition Task
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. The Modular Addition Task">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Task
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-a-prime-modulus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why a Prime Modulus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-it-is-a-good-circuit-discovery-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why It Is a Good Circuit Discovery Target
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-grokking-phenomenon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The Grokking Phenomenon
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. The Grokking Phenomenon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-grokking-happens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Grokking Happens
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#foundational-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Foundational References
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-this-project-adds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Project Adds
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-what-circuit-discovery-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. What Circuit Discovery Means
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. What Circuit Discovery Means">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#circuits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Circuits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-residual-stream-as-a-communication-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Residual Stream as a Communication Channel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-three-analysis-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Three Analysis Tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Three Analysis Tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-attention-pattern-visualisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Attention Pattern Visualisation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-activation-patching-causal-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Activation Patching (Causal Tracing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-logit-lens-and-direct-logit-attribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Logit Lens and Direct Logit Attribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-specific-claims-hypotheses-to-verify" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Specific Claims (Hypotheses to Verify)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Specific Claims (Hypotheses to Verify)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#h1-the-model-uses-fourier-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        H1: The model uses Fourier features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#h2-specific-attention-heads-implement-the-key-computation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        H2: Specific attention heads implement the key computation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#h3-the-mlp-implements-a-frequency-selective-nonlinearity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        H3: The MLP implements a frequency-selective nonlinearity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#h4-the-circuit-can-be-reduced-to-a-small-set-of-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        H4: The circuit can be reduced to a small set of components
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h1>
+<h2 id="1-the-modular-addition-task">1. The Modular Addition Task<a class="headerlink" href="#1-the-modular-addition-task" title="Permanent link">&para;</a></h2>
+<h3 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">&para;</a></h3>
+<p>Modular addition is the problem of computing</p>
+<div class="arithmatex">\[
+(a + b) \bmod p
+\]</div>
+<p>where <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span> are integers in <span class="arithmatex">\(\{0, 1, \dots, p-1\}\)</span> and <span class="arithmatex">\(p\)</span> is a prime. We represent the input to the transformer as a sequence of three tokens:</p>
+<div class="arithmatex">\[
+[\; a,\; b,\; \texttt{=} \;]
+\]</div>
+<p>where <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span> are embedded directly as their integer token IDs (i.e. token <span class="arithmatex">\(0\)</span> represents the integer <span class="arithmatex">\(0\)</span>, token <span class="arithmatex">\(1\)</span> represents <span class="arithmatex">\(1\)</span>, etc.), and <span class="arithmatex">\(\texttt{=}\)</span> is an auxiliary token (token ID <span class="arithmatex">\(p\)</span>) marking the position where the model must output the answer. The vocabulary size is <span class="arithmatex">\(p + 1\)</span>: the integers <span class="arithmatex">\(0\)</span> through <span class="arithmatex">\(p-1\)</span> plus the <span class="arithmatex">\(\texttt{=}\)</span> token. The label is the correct answer token <span class="arithmatex">\((a + b) \bmod p\)</span>.</p>
+<p>There are exactly <span class="arithmatex">\(p^2\)</span> possible inputs. For <span class="arithmatex">\(p = 113\)</span>, the full dataset contains <span class="arithmatex">\(113^2 = 12,\!769\)</span> examples — small enough to fit in a single batch even on a free-tier GPU.</p>
+<h3 id="why-this-task">Why This Task<a class="headerlink" href="#why-this-task" title="Permanent link">&para;</a></h3>
+<p>Modular addition has become a canonical benchmark in mechanistic interpretability for several reasons:</p>
+<ol>
+<li>
+<p><strong>Known ground-truth solution.</strong> Unlike most neural network behaviours, the optimal algorithm for this task is known analytically: it is the discrete Fourier transform over <span class="arithmatex">\(\mathbb{Z}/p\mathbb{Z}\)</span>. A transformer can solve modular addition by learning to represent numbers in a Fourier basis and using trigonometric identities to compute the sum. This means a researcher can <em>verify</em> whether the model has discovered the correct algorithm, rather than just describing what it does without ground truth.</p>
+</li>
+<li>
+<p><strong>Non-trivial but discoverable.</strong> The algorithm is not trivial (it requires learning a frequency representation, attention-based summation, and nonlinear feature interaction), but it is small enough that a single-layer, 4-head transformer can express it. This makes full reverse-engineering feasible.</p>
+</li>
+<li>
+<p><strong>Strong empirical signature.</strong> The model exhibits <em>grokking</em> (sudden generalisation after prolonged memorisation) on this task, which provides a clear behavioural signal that an algorithmic solution has been discovered.</p>
+</li>
+<li>
+<p><strong>Clean mathematics.</strong> The group <span class="arithmatex">\(\mathbb{Z}/p\mathbb{Z}\)</span> has a rich but well-understood structure. The Fourier basis diagonalises the convolution operator, which is exactly the operation the model needs to compute (since <span class="arithmatex">\((a+b) \bmod p\)</span> is a convolution in the group algebra). This mathematical elegance makes the analysis rigorous.</p>
+</li>
+</ol>
+<h3 id="why-a-prime-modulus">Why a Prime Modulus<a class="headerlink" href="#why-a-prime-modulus" title="Permanent link">&para;</a></h3>
+<p>When <span class="arithmatex">\(p\)</span> is prime, <span class="arithmatex">\(\mathbb{Z}/p\mathbb{Z}\)</span> is a <em>field</em> (every non-zero element has a multiplicative inverse). This gives the Fourier basis two important properties:</p>
+<ul>
+<li><strong>Completeness:</strong> The <span class="arithmatex">\(p\)</span> Fourier basis vectors <span class="arithmatex">\(\{ \mathbf{f}_k \}_{k=0}^{p-1}\)</span> form an orthonormal basis for <span class="arithmatex">\(\mathbb{R}^p\)</span> (or <span class="arithmatex">\(\mathbb{C}^p\)</span>).</li>
+<li><strong>Convolution theorem:</strong> Convolution in the spatial domain corresponds to pointwise multiplication in the Fourier domain. Since <span class="arithmatex">\((a+b) \bmod p\)</span> is a convolution of the delta functions at <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span>, the Fourier representation factors the computation: the Fourier transform of the answer is the elementwise product of the Fourier transforms of the inputs.</li>
+</ul>
+<p>For composite <span class="arithmatex">\(p\)</span>, the Fourier analysis is messier (the basis may not be complete, and the group structure has zero divisors). Prime <span class="arithmatex">\(p\)</span> gives the cleanest theoretical setting.</p>
+<h3 id="why-it-is-a-good-circuit-discovery-target">Why It Is a Good Circuit Discovery Target<a class="headerlink" href="#why-it-is-a-good-circuit-discovery-target" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Implication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fully synthetic data</td>
+<td>No distribution shift, no labelling noise, infinite supply</td>
+</tr>
+<tr>
+<td>100% ground truth labels</td>
+<td>Every metric is exact, not statistical</td>
+</tr>
+<tr>
+<td>Small model (1 layer, 4 heads)</td>
+<td>Full circuit description fits in a diagram</td>
+</tr>
+<tr>
+<td>Known solution in literature</td>
+<td>Findings can be validated against Nanda et al. (2023)</td>
+</tr>
+<tr>
+<td>Reproducible grokking</td>
+<td>The behavioural phase change is a strong signal that a new algorithm has been "found" by the model</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-the-grokking-phenomenon">2. The Grokking Phenomenon<a class="headerlink" href="#2-the-grokking-phenomenon" title="Permanent link">&para;</a></h2>
+<h3 id="definition_1">Definition<a class="headerlink" href="#definition_1" title="Permanent link">&para;</a></h3>
+<p>Grokking, introduced by Power et al. (2022), is the phenomenon where a neural network first <em>memorises</em> the training data and only later <em>generalises</em> to the validation set, despite continued training with no new data. The characteristic signature is:</p>
+<ol>
+<li><strong>Memorisation phase:</strong> Training accuracy reaches <span class="arithmatex">\(\sim 100\%\)</span> while validation accuracy remains near chance.</li>
+<li><strong>Generalisation phase:</strong> After many additional gradient steps, validation accuracy suddenly jumps to <span class="arithmatex">\(\sim 100\%\)</span>, often within a few hundred steps.</li>
+<li><strong>Post-generalisation:</strong> Both training and validation accuracy remain at ceiling.</li>
+</ol>
+<p>The loss curve shows two distinct phases: a fast initial drop (memorisation), then a long plateau, followed by a second sharp drop (generalisation). This "double descent" in validation loss occurs without any change to the data or learning rate.</p>
+<div style="text-align: center;">
+<em>Figure 1 will show the characteristic grokking dynamics: train/val loss and accuracy vs. training step, with the grokking point marked.</em>
+</div>
+
+<h3 id="why-grokking-happens">Why Grokking Happens<a class="headerlink" href="#why-grokking-happens" title="Permanent link">&para;</a></h3>
+<p>The leading hypothesis, supported by Nanda et al. (2023), is that the model simultaneously learns two solutions:</p>
+<ul>
+<li><strong>A memorising solution</strong> that stores individual training examples in its parameters. This solution learns quickly because it requires only rote storage, but it requires high-weight-norm parameters (since each example must be stored with enough precision to be retrieved correctly).</li>
+<li><strong>A generalising solution</strong> that compresses the underlying algorithm. This solution learns slowly because it requires discovering the Fourier structure of the task, but it is more parameter-efficient (lower weight norm).</li>
+</ul>
+<p>Weight decay penalises large weights. The memorisation solution has high weight norm, so it is strongly penalised. The generalising solution has low weight norm, so it is preferred by the optimiser. Initially, the memorisation solution dominates because it learns faster. But as weight decay continuously suppresses it, the generalising solution slowly becomes dominant. When the generalising solution crosses a threshold, validation accuracy suddenly jumps — the model has "groked."</p>
+<p>This is why high weight decay (typically <span class="arithmatex">\(1.0\)</span>) is critical for reproducing grokking: without it, the memorisation solution would never be sufficiently suppressed.</p>
+<h3 id="foundational-references">Foundational References<a class="headerlink" href="#foundational-references" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Power et al. (2022). "Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets."</strong> <em>arXiv:2201.02177.</em></li>
+<li>First described the grokking phenomenon.</li>
+<li>Demonstrated it on modular addition, modular subtraction, and other algorithmic tasks.</li>
+<li>
+<p>Showed that grokking occurs across multiple architectures (transformers, MLPs, LSTMs).</p>
+</li>
+<li>
+<p><strong>Nanda et al. (2023). "Progress Measures for Grokking via Mechanistic Interpretability."</strong> <em>ICLR 2023.</em></p>
+</li>
+<li>Reverse-engineered the Fourier algorithm in a 1-layer transformer trained on modular addition.</li>
+<li>Introduced the "effective rank" progress measure: the rank of the embedding and unembedding matrices decreases during grokking as the model compresses its representation.</li>
+<li>Showed that the model uses a small set of Fourier frequencies and that attention heads compute the sum via a trigonometric identity.</li>
+<li>This paper is the direct precursor to the present project.</li>
+</ol>
+<h3 id="what-this-project-adds">What This Project Adds<a class="headerlink" href="#what-this-project-adds" title="Permanent link">&para;</a></h3>
+<p>Where Nanda et al. (2023) focused on the progress measure (a scalar quantity that predicts grokking before it happens), this project provides:</p>
+<ul>
+<li>A <strong>complete end-to-end circuit description</strong> with causal validation via activation patching.</li>
+<li><strong>Publication-quality figures</strong> for every step of the analysis.</li>
+<li>A <strong>minimal circuit</strong> that accounts for &gt;90% of model performance with &lt;50% of components.</li>
+<li>A <strong>self-contained, reproducible pipeline</strong> usable as a template for future circuit discovery projects.</li>
+</ul>
+<hr />
+<h2 id="3-what-circuit-discovery-means">3. What Circuit Discovery Means<a class="headerlink" href="#3-what-circuit-discovery-means" title="Permanent link">&para;</a></h2>
+<h3 id="circuits">Circuits<a class="headerlink" href="#circuits" title="Permanent link">&para;</a></h3>
+<p>A <em>circuit</em> is a minimal subgraph of the transformer's computational graph that is causally responsible for the model's behaviour on a specific task. The full model has many parameters, but only a subset are used for any given task. The goal of circuit discovery is to identify this subset and explain how it implements the computation.</p>
+<p>Formally, a circuit consists of:</p>
+<ul>
+<li><strong>Nodes:</strong> Specific attention heads, MLP neurons, or embedding/unembedding dimensions.</li>
+<li><strong>Edges:</strong> The flow of information through the residual stream, attention, and MLP computations.</li>
+</ul>
+<p>A good circuit explanation satisfies three criteria:</p>
+<ol>
+<li><strong>Faithfulness:</strong> If you ablate all components outside the circuit, the model still performs the task at near-original accuracy.</li>
+<li><strong>Completeness:</strong> The circuit accounts for most (&gt;90%) of the model's performance.</li>
+<li><strong>Mechanistic understanding:</strong> Each component's function is described in terms of the algorithm it implements, not just in terms of its activation patterns.</li>
+</ol>
+<h3 id="the-residual-stream-as-a-communication-channel">The Residual Stream as a Communication Channel<a class="headerlink" href="#the-residual-stream-as-a-communication-channel" title="Permanent link">&para;</a></h3>
+<p>Elhage et al. (2021) introduced the "residual stream" perspective: in a transformer, every sublayer (attention head, MLP) reads from the same residual stream and writes back to it. Concretely, for a layer <span class="arithmatex">\(l\)</span> with attention sublayer <span class="arithmatex">\(\text{Attn}_l\)</span> and MLP sublayer <span class="arithmatex">\(\text{MLP}_l\)</span>:</p>
+<div class="arithmatex">\[
+x_{l+1} = x_l + \text{Attn}_l(x_l) + \text{MLP}_l(x_l + \text{Attn}_l(x_l))
+\]</div>
+<p>where <span class="arithmatex">\(x_l\)</span> is the residual stream state at layer <span class="arithmatex">\(l\)</span> (a <span class="arithmatex">\([\text{seq\_len}, d_\text{model}]\)</span> tensor). Each component's output is <em>added</em> to the stream, not multiplied. This linearity is the key architectural fact that makes mechanistic interpretability tractable: the final output is a linear sum of component contributions.</p>
+<p>The residual stream is the "communication bus": any component can read from any position's residual stream (via attention) and write to any position's residual stream. This is in contrast to strictly feed-forward architectures where information flows in one direction only.</p>
+<h3 id="the-three-analysis-tools">The Three Analysis Tools<a class="headerlink" href="#the-three-analysis-tools" title="Permanent link">&para;</a></h3>
+<h4 id="1-attention-pattern-visualisation">1. Attention Pattern Visualisation<a class="headerlink" href="#1-attention-pattern-visualisation" title="Permanent link">&para;</a></h4>
+<p>Attention heads compute a weighted sum of value vectors at different positions. The attention weights (the softmax of query-key dot products) reveal <em>where</em> each head is reading from. For a head <span class="arithmatex">\(h\)</span> at layer <span class="arithmatex">\(l\)</span>:</p>
+<div class="arithmatex">\[
+\text{attn}_{l,h}[i, j] = \text{softmax}_j \left( \frac{(x_i W_Q) (x_j W_K)^\top}{\sqrt{d_\text{head}}} \right)
+\]</div>
+<p>This is a <span class="arithmatex">\([\text{seq\_len}, \text{seq\_len}]\)</span> matrix where row <span class="arithmatex">\(i\)</span> shows how much position <span class="arithmatex">\(i\)</span> attends to each position <span class="arithmatex">\(j\)</span>. Visualising these patterns tells us which positions the model considers relevant for each computation.</p>
+<h4 id="2-activation-patching-causal-tracing">2. Activation Patching (Causal Tracing)<a class="headerlink" href="#2-activation-patching-causal-tracing" title="Permanent link">&para;</a></h4>
+<p>Activation patching is the most direct method for establishing causal necessity. The procedure is:</p>
+<ol>
+<li>Run the model on a <strong>clean input</strong> (e.g. <span class="arithmatex">\((a, b) = (5, 3)\)</span>) and cache all intermediate activations.</li>
+<li>Run the model on a <strong>corrupted input</strong> (e.g. <span class="arithmatex">\((a', b') = (17, 3)\)</span> where <span class="arithmatex">\(a' \neq a\)</span>) and cache all intermediate activations.</li>
+<li>Re-run the corrupted model, but at a specific hook point (e.g. the output of head 2 at layer 1), replace the corrupted activation with the clean activation.</li>
+<li>Measure how much the model's performance recovers towards the clean output.</li>
+</ol>
+<p>If patching component <span class="arithmatex">\(X\)</span> restores <span class="arithmatex">\(&gt; 50\%\)</span> of performance, then <span class="arithmatex">\(X\)</span> is causally important: the computation that determines the answer passes through <span class="arithmatex">\(X\)</span>.</p>
+<p>Unlike zero-ablation (setting activations to zero), which can push the model into a distribution it never sees during training, activation patching uses a <em>meaningful counterfactual</em> — the activation from a different input — giving cleaner causal attribution.</p>
+<h4 id="3-logit-lens-and-direct-logit-attribution">3. Logit Lens and Direct Logit Attribution<a class="headerlink" href="#3-logit-lens-and-direct-logit-attribution" title="Permanent link">&para;</a></h4>
+<p>Because the residual stream is linear, the final logits can be decomposed as a sum of contributions from each component:</p>
+<div class="arithmatex">\[
+\text{logits} = W_U \cdot \text{LayerNorm}\left( \sum_{\text{components } c} \text{output}_c \right)
+\]</div>
+<p>The <strong>logit lens</strong> applies the unembedding <span class="arithmatex">\(W_U\)</span> at every layer to see how the model's prediction evolves through the depth. This reveals whether the answer is "written in" early (embedding layer directly encodes the answer) or late (requires full computation through attention and MLP).</p>
+<p><strong>Direct logit attribution</strong> decomposes the logit for the correct answer as a sum over components:</p>
+<div class="arithmatex">\[
+\log P(\text{correct}) = \sum_c \underbrace{W_U[\text{correct}] \cdot \text{output}_c}_{\text{direct contribution of } c}
+\]</div>
+<p>This tells us which components contribute positively to the correct answer and which contribute negatively (e.g. suppressing incorrect answers).</p>
+<hr />
+<h2 id="4-specific-claims-hypotheses-to-verify">4. Specific Claims (Hypotheses to Verify)<a class="headerlink" href="#4-specific-claims-hypotheses-to-verify" title="Permanent link">&para;</a></h2>
+<h3 id="h1-the-model-uses-fourier-features">H1: The model uses Fourier features<a class="headerlink" href="#h1-the-model-uses-fourier-features" title="Permanent link">&para;</a></h3>
+<p>The model represents <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span> as linear combinations of <span class="arithmatex">\(\sin(2\pi k a / p)\)</span> and <span class="arithmatex">\(\cos(2\pi k a / p)\)</span> for a small set of frequencies <span class="arithmatex">\(k\)</span>.</p>
+<p><strong>Evidence required:</strong> The embedding matrix <span class="arithmatex">\(W_E\)</span> (shape <span class="arithmatex">\([p, d_\text{model}]\)</span>) should have a Fourier spectrum concentrated on a few frequencies. The fraction of variance explained by the top <span class="arithmatex">\(K\)</span> Fourier frequencies should exceed <span class="arithmatex">\(80\%\)</span> for <span class="arithmatex">\(K \leq 5\)</span>.</p>
+<h3 id="h2-specific-attention-heads-implement-the-key-computation">H2: Specific attention heads implement the key computation<a class="headerlink" href="#h2-specific-attention-heads-implement-the-key-computation" title="Permanent link">&para;</a></h3>
+<p>Not all 4 attention heads are equally important. Some attend from the <span class="arithmatex">\(\texttt{=}\)</span> position to the <span class="arithmatex">\(a\)</span> or <span class="arithmatex">\(b\)</span> positions and contribute to computing the sum representation.</p>
+<p><strong>Evidence required:</strong> Attention pattern analysis shows which heads attend to which positions. Activation patching shows that only 2–3 heads are causally necessary. The minimal circuit excludes at least one head without significant performance loss.</p>
+<h3 id="h3-the-mlp-implements-a-frequency-selective-nonlinearity">H3: The MLP implements a frequency-selective nonlinearity<a class="headerlink" href="#h3-the-mlp-implements-a-frequency-selective-nonlinearity" title="Permanent link">&para;</a></h3>
+<p>The MLP neurons act as "frequency detectors": each neuron responds strongly to inputs where <span class="arithmatex">\(a + b\)</span> has a specific value mod <span class="arithmatex">\(p\)</span>, and its 2D Fourier spectrum over <span class="arithmatex">\((a, b)\)</span> space is concentrated on a single frequency <span class="arithmatex">\(k\)</span>.</p>
+<p><strong>Evidence required:</strong> The 2D Fourier spectrum of top MLP neurons shows energy concentrated at specific <span class="arithmatex">\((k_a, k_b)\)</span> pairs corresponding to <span class="arithmatex">\(\cos(2\pi k (a+b) / p)\)</span> and <span class="arithmatex">\(\sin(2\pi k (a+b) / p)\)</span>.</p>
+<h3 id="h4-the-circuit-can-be-reduced-to-a-small-set-of-components">H4: The circuit can be reduced to a small set of components<a class="headerlink" href="#h4-the-circuit-can-be-reduced-to-a-small-set-of-components" title="Permanent link">&para;</a></h3>
+<p>A minimal set of 2–3 attention heads and 10–20 MLP neurons accounts for <span class="arithmatex">\(&gt;90\%\)</span> of model accuracy.</p>
+<p><strong>Evidence required:</strong> Ablating all non-circuit components leaves accuracy at <span class="arithmatex">\(&gt;90\%\)</span> of the full model. The ablation curve (accuracy vs. number of components) saturates quickly.</p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Elhage, N., et al. (2021). "A Mathematical Framework for Transformer Circuits." <em>Transformer Circuits Thread.</em></li>
+<li>Nanda, N., et al. (2023). "Progress Measures for Grokking via Mechanistic Interpretability." <em>ICLR 2023.</em></li>
+<li>Power, A., et al. (2022). "Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets." <em>arXiv:2201.02177.</em></li>
+</ul>
+<hr />
+<p><em>This document is Section 1 of the research writeup for "Circuit Discovery on a Toy Task: Reverse-Engineering a Grokked Transformer on Modular Addition."</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/mosadcreates/circuit-discovery-toy-task" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.expand", "navigation.sections", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
