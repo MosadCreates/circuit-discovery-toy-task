@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=64.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "circuit-discovery-toy-task"
+version = "1.0.0"
+description = "Reverse-engineering a grokked transformer on modular addition: Fourier mechanisms, activation patching, and minimal circuit identification."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Mechanistic Interpretability Research"},
+]
+keywords = ["mechanistic-interpretability", "transformer-circuits", "grokking", "modular-addition", "transformerlens"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "torch>=2.0.0",
+    "transformerlens>=3.4.0",
+    "einops",
+    "numpy",
+    "matplotlib",
+    "seaborn",
+    "pyyaml",
+    "python-dotenv",
+    "wandb",
+    "pytest",
+    "jaxtyping",
+    "typeguard",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov",
+    "black",
+    "ruff",
+    "mypy",
+]
+cpu = [
+    "torch>=2.0.0",
+    "transformerlens>=3.4.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

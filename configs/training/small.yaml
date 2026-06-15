@@ -1,0 +1,18 @@
+# Small config — faster training with smaller prime
+p: 47
+n_layers: 1
+n_heads: 4
+d_model: 64
+d_mlp: 256
+lr: 0.001
+weight_decay: 1.0
+n_steps: 30000
+seed: 42
+batch_size: 2209             # p^2 = 47^2
+val_split: 0.3
+device: auto
+wandb_project: circuit-discovery-toy-task
+wandb_run_name: small-p47
+log_every: 10
+save_best: true
+save_steps: [100, 500, 1000, 3000, 5000, 10000, 15000, 20000, 25000, 30000]

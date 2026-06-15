@@ -1,0 +1,27 @@
+# Default analysis config
+checkpoint_path: results/checkpoints/best_val_acc.pt
+p: 113
+d_model: 128
+device: auto
+seed: 42
+
+# Number of random inputs for attention analysis
+n_attention_samples: 50
+
+# Number of top Fourier neurons to analyse
+n_top_neurons: 20
+
+# Fourier analysis
+fourier:
+  embedding_spectrum: true
+  neuron_spectrum: true
+  logit_spectrum: true
+
+# Logit lens
+logit_lens: true
+
+# Direct logit attribution
+direct_logit_attribution: true
+
+# Weight analysis
+weight_analysis: true

@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.venv/
+venv/
+
+# Results / checkpoints
+results/checkpoints/
+results/figures/
+results/patching/
+results/fourier/
+results/attention/
+results/metrics/
+
+# Docs build
+site/
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Wandb
+wandb/
+
+# Docker
+docker/.dockerignore
+
+# Jupyter
+notebooks/.ipynb_checkpoints/

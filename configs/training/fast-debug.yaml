@@ -1,0 +1,18 @@
+# Fast debug config — very small model for quick iteration
+p: 13
+n_layers: 1
+n_heads: 2
+d_model: 32
+d_mlp: 128
+lr: 0.001
+weight_decay: 0.5
+n_steps: 5000
+seed: 42
+batch_size: 169              # p^2 = 13^2
+val_split: 0.3
+device: auto
+wandb_project: circuit-discovery-toy-task
+wandb_run_name: debug-p13
+checkpoint_every: 1000
+log_every: 5
+save_best: true

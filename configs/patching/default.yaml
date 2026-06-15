@@ -1,0 +1,22 @@
+# Default patching config
+checkpoint_path: results/checkpoints/best_val_acc.pt
+p: 113
+device: auto
+seed: 42
+
+# Corruption strategies to run
+corruption_strategies:
+  - random          # replace a with random a' != a
+  - symmetric       # replace (a,b) with (a',b') where a'+b' ≡ a+b (mod p)
+  - zero_ablation   # set activations to zero (sparingly)
+
+# Number of samples for patching experiments
+n_samples: 200
+
+# Which experiments to run
+experiments:
+  residual_stream: true
+  head_level: true
+  mlp_level: true
+  neuron_level: true
+  path_patching: true

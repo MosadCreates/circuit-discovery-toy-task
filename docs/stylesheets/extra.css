@@ -1,0 +1,37 @@
+.figure-caption {
+    text-align: center;
+    font-style: italic;
+    margin-top: -0.5em;
+    margin-bottom: 2em;
+    color: var(--md-typeset-color);
+    opacity: 0.8;
+}
+
+.md-typeset h2 {
+    border-bottom: 2px solid var(--md-primary-fg-color);
+    padding-bottom: 0.2em;
+}
+
+.md-typeset .abstract-box {
+    background: var(--md-code-bg-color);
+    border-left: 4px solid var(--md-primary-fg-color);
+    padding: 1em 1.5em;
+    border-radius: 4px;
+    margin: 1em 0;
+}
+
+.md-typeset .hypothesis {
+    background: var(--md-code-bg-color);
+    border-left: 4px solid var(--md-accent-fg-color);
+    padding: 0.5em 1em;
+    margin: 1em 0;
+    border-radius: 4px;
+}
+
+.md-typeset .key-finding {
+    background: var(--md-code-bg-color);
+    border-left: 4px solid #00c853;
+    padding: 0.5em 1em;
+    margin: 1em 0;
+    border-radius: 4px;
+}

@@ -1,0 +1,18 @@
+# Default training config — reproduces grokking on modular addition (p=113)
+p: 113
+n_layers: 1
+n_heads: 4
+d_model: 128
+d_mlp: 512
+lr: 0.001
+weight_decay: 1.0
+n_steps: 50000
+seed: 42
+batch_size: 12769            # full-batch (p^2)
+val_split: 0.3
+device: auto
+wandb_project: circuit-discovery-toy-task
+wandb_run_name: default-p113
+log_every: 10
+save_best: true
+save_steps: [100, 500, 1000, 2000, 5000, 10000, 20000, 30000, 40000, 50000]

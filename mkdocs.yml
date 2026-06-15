@@ -1,0 +1,88 @@
+site_name: Circuit Discovery on a Toy Task
+site_description: "Reverse-engineering a grokked transformer on modular addition: Fourier mechanisms, activation patching, and minimal circuit identification"
+site_author: Mechanistic Interpretability Research
+site_url: https://yourusername.github.io/circuit-discovery-toy-task
+repo_url: https://github.com/yourusername/circuit-discovery-toy-task
+repo_name: circuit-discovery-toy-task
+edit_uri: ""
+
+theme:
+  name: material
+  palette:
+    - scheme: slate
+      primary: indigo
+      accent: deep-orange
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+    - scheme: default
+      primary: indigo
+      accent: deep-orange
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.expand
+    - navigation.sections
+    - navigation.top
+    - toc.follow
+    - content.code.copy
+    - content.code.annotate
+  icon:
+    logo: material/brain
+    repo: fontawesome/brands/github
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/yourusername/circuit-discovery-toy-task
+  generator: false
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - admonition
+  - footnotes
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - macros:
+      module_name: docs/macros
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Home: index.md
+  - Background: background.md
+  - Methods: methods.md
+  - Fourier Analysis: fourier_analysis.md
+  - Circuit Analysis: circuit_analysis.md
+  - Minimal Circuit: minimal_circuit.md
+  - Discussion: discussion.md
+  - Full Writeup: writeup.md
+  - Reproduce: reproduce.md
+  - Appendix: appendix.md
