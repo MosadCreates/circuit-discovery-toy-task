@@ -1,0 +1,14 @@
+# Small patching config — matches training/small.yaml (p=47)
+p: 47
+n_layers: 1
+n_heads: 4
+d_model: 64
+d_mlp: 256
+seed: 42
+corruption_strategies: ["random", "symmetric", "zero_ablation"]
+n_samples: 200
+experiments:
+  residual_stream: true
+  head_patch: true
+  mlp_patch: true
+  path_patch: true
