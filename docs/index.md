@@ -4,7 +4,7 @@
 
 <div class="abstract-box">
 
-**Abstract.** We train a single-layer, four-head transformer from scratch on modular addition $(a+b) \bmod 113$ and fully reverse-engineer the algorithm it learns using mechanistic interpretability techniques. The model discovers a Fourier-based computation: token embeddings are linear combinations of $\sin$ and $\cos$ basis functions over $\mathbb{Z}/p\mathbb{Z}$, attention heads route the embedded tokens to the output position, and the MLP implements trigonometric identities to compute the sum. Using activation patching, we identify a minimal circuit of 2 attention heads and 15 MLP neurons that accounts for $>95\%$ of model performance — fewer than $5\%$ of all components. This work provides a complete, reproducible template for circuit discovery on a canonical mechanistic interpretability benchmark.
+**Abstract.** We train a single-layer, four-head transformer from scratch on modular addition \((a+b) \bmod 113\) and fully reverse-engineer the algorithm it learns using mechanistic interpretability techniques. The model discovers a Fourier-based computation: token embeddings are linear combinations of \(\sin\) and \(\cos\) basis functions over \(\mathbb{Z}/p\mathbb{Z}\), attention heads route the embedded tokens to the output position, and the MLP implements trigonometric identities to compute the sum. Using activation patching, we identify a minimal circuit of 2 attention heads and 15 MLP neurons that accounts for \(>95\%\) of model performance — fewer than \(5\%\) of all components. This work provides a complete, reproducible template for circuit discovery on a canonical mechanistic interpretability benchmark.
 
 </div>
 
@@ -16,7 +16,7 @@
 ## Key Results
 
 <div class="key-finding">
-<strong>Fourier Features:</strong> The embedding matrix concentrates $>80\%$ of its variance in $\leq 5$ Fourier frequencies. The model represents numbers in a Fourier basis.
+<strong>Fourier Features:</strong> The embedding matrix concentrates \(>80\%\) of its variance in \(\leq 5\) Fourier frequencies. The model represents numbers in a Fourier basis.
 </div>
 
 <div class="key-finding">
@@ -24,11 +24,11 @@
 </div>
 
 <div class="key-finding">
-<strong>Frequency-Selective MLP:</strong> Specific MLP neurons detect frequency-k components of $(a+b) \bmod p$, implementing the trigonometric identity via the ReLU nonlinearity.
+<strong>Frequency-Selective MLP:</strong> Specific MLP neurons detect frequency-k components of \((a+b) \bmod p\), implementing the trigonometric identity via the ReLU nonlinearity.
 </div>
 
 <div class="key-finding">
-<strong>Minimal Circuit:</strong> A circuit of 2 heads + 15 neurons ($\sim 3\%$ of components) achieves $>95\%$ of full model accuracy.
+<strong>Minimal Circuit:</strong> A circuit of 2 heads + 15 neurons (\(\sim 3\%\) of components) achieves \(>95\%\) of full model accuracy.
 </div>
 
 ## Repository Structure
@@ -70,8 +70,8 @@ mkdocs build --clean -d site
 @misc{circuit-discovery-toy-task,
     title={Circuit Discovery on a Toy Task: 
            Reverse-Engineering a Grokked Transformer on Modular Addition},
-    author={Your Name},
+    author={Mohamed Mosad Ghonaim},
     year={2026},
-    howpublished={\url{https://github.com/yourusername/circuit-discovery-toy-task}}
+    howpublished={\url{https://github.com/mosadcreates/circuit-discovery-toy-task}}
 }
 ```

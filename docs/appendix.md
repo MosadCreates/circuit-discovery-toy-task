@@ -23,21 +23,21 @@ All figures are generated programmatically and saved to `results/figures/`. Copy
 ### Path Patching (Figure S1)
 
 <div style="text-align: center; margin: 2em 0;">
-    <img src="figures/Figure_path_patching.png" alt="Path Patching" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    <img src="../figures/Figure_path_patching.png" alt="Path Patching" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
     <p class="figure-caption"><strong>Figure S1:</strong> Path patching: for each head output -> MLP neuron connection, we patch that specific path and measure recovery. Shows which heads feed into which critical neurons.</p>
 </div>
 
 ### Logit Lens (Figure S2)
 
 <div style="text-align: center; margin: 2em 0;">
-    <img src="figures/Figure_logit_lens.png" alt="Logit Lens" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    <img src="../figures/Figure_logit_lens.png" alt="Logit Lens" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
     <p class="figure-caption"><strong>Figure S2:</strong> Logit lens decomposition showing the evolution of the correct logit through residual stream positions. The logit for the correct answer builds at the <code>=</code> position.</p>
 </div>
 
 ### Attention Variation (Figure S3)
 
 <div style="text-align: center; margin: 2em 0;">
-    <img src="figures/Figure_attention_variation.png" alt="Attention Variation" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    <img src="../figures/Figure_attention_variation.png" alt="Attention Variation" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
     <p class="figure-caption"><strong>Figure S3:</strong> Attention variation: how attention to a fixed input position changes as the other input varies. Shows that heads maintain consistent attention patterns regardless of the other input.</p>
 </div>
 

@@ -28,7 +28,7 @@ We evaluate the model after systematically zeroing out components:
 ## Ablation Curve
 
 <div style="text-align: center; margin: 2em 0;">
-    <img src="figures/Figure_9_ablation_curve.png" alt="Ablation Curve" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    <img src="../figures/Figure_9_ablation_curve.png" alt="Ablation Curve" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
     <p class="figure-caption"><strong>Figure 9:</strong> Accuracy vs number of remaining components. Adding 2 heads then 15 neurons recovers >95% of performance. The sharp knee at 5–15 neurons indicates a sparse set of critical neurons.</p>
 </div>
 

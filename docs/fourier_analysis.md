@@ -17,7 +17,7 @@ for $k = 1, \ldots, (p-1)/2$. Orthonormality ($F^\top F = I$) is verified numeri
 ## Embedding Fourier Spectrum
 
 <div style="text-align: center; margin: 2em 0;">
-    <img src="figures/Figure_2_embedding_fourier_spectrum.png" alt="Embedding Fourier Spectrum" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    <img src="../figures/Figure_2_embedding_fourier_spectrum.png" alt="Embedding Fourier Spectrum" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
     <p class="figure-caption"><strong>Figure 2:</strong> Fourier spectrum of the embedding matrix. Top-5 frequencies explain 83.4% of total variance. The model learns a sparse Fourier encoding.</p>
 </div>
 
@@ -29,7 +29,7 @@ for $k = 1, \ldots, (p-1)/2$. Orthonormality ($F^\top F = I$) is verified numeri
 ## MLP Neuron Fourier Analysis
 
 <div style="text-align: center; margin: 2em 0;">
-    <img src="figures/Figure_3_neuron_2d_fourier.png" alt="2D Fourier Spectrum of MLP Neurons" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    <img src="../figures/Figure_3_neuron_2d_fourier.png" alt="2D Fourier Spectrum of MLP Neurons" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
     <p class="figure-caption"><strong>Figure 3:</strong> 2D Fourier spectrum for selected MLP neurons. Energy concentrated on the diagonal (k, k) indicates that each neuron computes cos(k(a+b)) from cos(ka) and cos(kb).</p>
 </div>
 

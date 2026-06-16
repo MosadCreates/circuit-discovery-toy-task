@@ -108,7 +108,7 @@ This basis diagonalises the cyclic convolution operator. Since $(a+b) \bmod p$ i
 We extract the token embedding matrix $W_E \in \mathbb{R}^{p \times d_{\text{model}}}$ and compute the Fourier spectrum of each of its $d_{\text{model}}$ dimensions. Specifically, for each dimension $i$, we compute the vector $W_E[:, i] \in \mathbb{R}^p$ (the value of that dimension across all $p$ tokens) and project it onto the Fourier basis.
 
 <div style="text-align: center;">
-<strong>Figure 2: Embedding Fourier Spectrum.</strong> Heatmap of Fourier coefficient magnitudes for each embedding dimension. The x-axis is the embedding dimension index, the y-axis is the Fourier frequency $k$. The concentration on a small set of frequencies (horizontal bands) is clearly visible. Top-5 frequencies explain $>80\%$ of variance. <em>(See results/figures/Figure_2_embedding_fourier.png)</em>
+<strong>Figure 2: Embedding Fourier Spectrum.</strong> Heatmap of Fourier coefficient magnitudes for each embedding dimension. The x-axis is the embedding dimension index, the y-axis is the Fourier frequency \(k\). The concentration on a small set of frequencies (horizontal bands) is clearly visible. Top-5 frequencies explain \(>80\%\) of variance. <em>(See results/figures/Figure_2_embedding_fourier.png)</em>
 </div>
 
 The mean squared Fourier coefficient across all dimensions measures how much each frequency contributes to the embedding:
@@ -131,7 +131,7 @@ $$
 If a neuron implements a function that depends only on $(a+b) \bmod p$, its Fourier spectrum will be concentrated on the diagonal $k_a = k_b = k$. The magnitude of the diagonal coefficient at frequency $k$ measures how strongly the neuron responds to that frequency.
 
 <div style="text-align: center;">
-<strong>Figure 3: 2D Fourier Spectrum of Top MLP Neurons.</strong> Each panel shows the 2D Fourier magnitude spectrum for one of the top-20 most Fourier-structured MLP neurons. The diagonal $(k,k)$ structure is the signature of a neuron that detects $(a+b) \bmod p$ at a specific frequency. The concentration metric measures the fraction of total Fourier energy on the diagonal. <em>(See results/figures/Figure_3_neuron_2d_fourier.png)</em>
+<strong>Figure 3: 2D Fourier Spectrum of Top MLP Neurons.</strong> Each panel shows the 2D Fourier magnitude spectrum for one of the top-20 most Fourier-structured MLP neurons. The diagonal \((k,k)\) structure is the signature of a neuron that detects \((a+b) \bmod p\) at a specific frequency. The concentration metric measures the fraction of total Fourier energy on the diagonal. <em>(See results/figures/Figure_3_neuron_2d_fourier.png)</em>
 </div>
 
 The distribution of diagonal concentrations across all 512 MLP neurons shows that a small subset ($\sim 10\%$) of neurons have strong diagonal structure ($>0.3$ concentration), while most are relatively unstructured. These high-concentration neurons are the core of the circuit.
@@ -169,7 +169,7 @@ This closes the loop: the model uses Fourier features end-to-end, from embedding
 We compute the average attention pattern over 50 random $(a, b)$ pairs. For each head, we measure the attention weight from the $=$ position to each of the three positions ($a$, $b$, $=$).
 
 <div style="text-align: center;">
-<strong>Figure 4: Attention Head Summary.</strong> Average attention weights from the $=$ position to positions $a$, $b$, and $=$ for each of the 4 heads. Heads are classified by their dominant attention target. <em>(See results/figures/Figure_4_attention_summary.png)</em>
+<strong>Figure 4: Attention Head Summary.</strong> Average attention weights from the \(=\) position to positions \(a\), \(b\), and \(=\) for each of the 4 heads. Heads are classified by their dominant attention target. <em>(See results/figures/Figure_4_attention_summary.png)</em>
 </div>
 
 The four heads in the trained model show clear role differentiation:

@@ -1,10 +1,14 @@
-<h1 align="center">
-  Circuit Discovery on a Toy Task
-</h1>
+<h1 align="center">Circuit Discovery on a Toy Task</h1>
 
 <p align="center">
   <em>Reverse-engineering a grokked transformer on modular addition:<br>
   Fourier mechanisms, activation patching, and minimal circuit identification.</em>
+</p>
+
+<p align="center">
+  <a href="https://colab.research.google.com/github/MosadCreates/circuit-discovery-toy-task/blob/main/notebooks/demo.ipynb">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab"/>
+  </a>
 </p>
 
 ---
@@ -118,6 +122,14 @@ We train a single-layer, four-head transformer from scratch on **modular additio
 
 ---
 
+## Research Report
+
+The full writeup is available as a rendered static site:
+
+![MkDocs site](docs/figures/image.png)
+
+Build and serve locally with `make report` and `make serve-docs`.
+
 ## Table of Contents
 
 - [Quick Start](#quick-start)
@@ -140,7 +152,7 @@ cd circuit-discovery-toy-task
 python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements-cpu.txt   # CPU
 bash setup.sh                                                                                # CUDA
 
-# Train model (~30 min on T4)
+# Train model ~30 min on T4 / ~8 min on RTX 5060
 python src/training/train.py --config configs/training/default.yaml
 
 # Run full analysis pipeline
@@ -228,7 +240,7 @@ Full pinned versions in [`requirements.txt`](requirements.txt) (CUDA) and [`requ
 @misc{circuit-discovery-toy-task,
     title={Circuit Discovery on a Toy Task:
            Reverse-Engineering a Grokked Transformer on Modular Addition},
-    author={Mosad Creates},
+    author={Mohamed Mosad Ghonaim},
     year={2026},
     howpublished={\url{https://github.com/mosadcreates/circuit-discovery-toy-task}}
 }
