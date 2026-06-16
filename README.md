@@ -60,47 +60,47 @@ We train a single-layer, four-head transformer from scratch on **modular additio
 ### Fourier Analysis
 
 <p align="center">
-  <img src="results/fourier/embedding_fourier.png" alt="Embedding Fourier Spectrum" width="80%">
+  <img src="results/embedding_fourier.png" alt="Embedding Fourier Spectrum" width="80%">
   <br><strong>Figure 1:</strong> Embedding Fourier spectrum — 5 frequencies explain 83.4% of variance.
 </p>
 
 <p align="center">
-  <img src="results/fourier/neuron_2d_fourier_top20.png" alt="2D Fourier Spectrum of MLP Neurons" width="80%">
+  <img src="results/neuron_2d_fourier_top20.png" alt="2D Fourier Spectrum of MLP Neurons" width="80%">
   <br><strong>Figure 2:</strong> 2D Fourier spectrum of top-20 MLP neurons. Diagonal (k,k) structure confirms the trigonometric identity.
 </p>
 
 <p align="center">
-  <img src="results/fourier/logit_fourier.png" alt="Logit Fourier Spectrum" width="80%">
+  <img src="results/logit_fourier.png" alt="Logit Fourier Spectrum" width="80%">
   <br><strong>Figure 3:</strong> Fourier spectrum of the unembedding matrix — top-10 frequencies explain 85.4% of variance.
 </p>
 
 ### Attention Analysis
 
 <p align="center">
-  <img src="results/attention/attention_summary.png" alt="Attention Pattern Summary" width="80%">
+  <img src="results/attention_summary.png" alt="Attention Pattern Summary" width="80%">
   <br><strong>Figure 4:</strong> Attention head summary — heads 0 and 1 route a and b to the output position.
 </p>
 
 <p align="center">
-  <img src="results/attention/attention_sample_0.png" alt="Sample Attention Patterns" width="45%">
-  <img src="results/attention/attention_sample_1.png" alt="Sample Attention Patterns" width="45%">
+  <img src="results/attention_sample_0.png" alt="Sample Attention Patterns" width="45%">
+  <img src="results/attention_sample_1.png" alt="Sample Attention Patterns" width="45%">
   <br><strong>Figure 5:</strong> Per-head attention patterns for sample inputs.
 </p>
 
 ### Activation Patching
 
 <p align="center">
-  <img src="results/patching/residual_stream_patch.png" alt="Residual Stream Patching" width="80%">
+  <img src="results/residual_stream_patch.png" alt="Residual Stream Patching" width="80%">
   <br><strong>Figure 6:</strong> Residual stream causal tracing — pre-attention at a and post-MLP at = each show 100% recovery.
 </p>
 
 <p align="center">
-  <img src="results/patching/head_patch.png" alt="Head-Level Patching" width="80%">
+  <img src="results/head_patch.png" alt="Head-Level Patching" width="80%">
   <br><strong>Figure 7:</strong> Head-level activation patching — only heads 0 and 1 show positive recovery (>20%).
 </p>
 
 <p align="center">
-  <img src="results/patching/neuron_patch.png" alt="Neuron-Level Patching" width="80%">
+  <img src="results/neuron_patch.png" alt="Neuron-Level Patching" width="80%">
   <br><strong>Figure 8:</strong> Neuron-level patching histogram — heavy-tailed distribution; top-15 neurons carry most causal weight.
 </p>
 
