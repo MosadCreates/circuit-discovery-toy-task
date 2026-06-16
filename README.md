@@ -36,11 +36,7 @@ We train a single-layer, four-head transformer from scratch on **modular additio
 
 A **minimal circuit of 2 attention heads and 15 MLP neurons** (fewer than 5% of all components) achieves >95% of the full model's accuracy.
 
-<p align="center">
-  <img src="docs/figures/Figure_3_neuron_2d_fourier.png" alt="2D Fourier Spectrum of MLP Neurons" width="80%">
-  <br>
-  <em>2D Fourier spectra of MLP neurons. Energy concentrated on the diagonal (k,k) confirms the trigonometric identity computation.</em>
-</p>
+> **All figures are generated programmatically.** See the [Live Writeup](https://mosadcreates.github.io/circuit-discovery-toy-task/) for 9 publication-quality figures including Fourier spectra, activation patching heatmaps, and the minimal circuit ablation curve.
 
 ---
 
